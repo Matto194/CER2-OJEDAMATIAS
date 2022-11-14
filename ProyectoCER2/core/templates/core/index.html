@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title %} Inicio {% endblock %}
+
+{% block content %}
+{% if encomienda %}
+<div class="container" > 
+    <div class="row">
+    {% for enco in encomienda %}    
+    <div class="col-md-4">
+    <div class="card" style="width: 20rem;" id="tarjeta">
+        <div class="card-body">
+          <h5 class="card-title">{{enco}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{enco.fecha_recepcion}} </li>
+            <li class="list-group-item">Estado: {{enco.estado}}</li>
+            <li class="list-group-item">Conserje que recibió    : {{enco.conserje.first_name}} {{enco.conserje.last_name}}</li>
+            <li class="list-group-item">Remitente: {{enco.remitente}}</li>
+            <li class="list-group-item">Destinatario: {{enco.destinatario}}</li>
+        </ul>
+    </div>
+    </div>
+    {% endfor %}
+        
+    </div>
+</div>  
+{% else %}
+<h3> No existe Correspondencia para esta Residencia, o esta Residencia no existe </h3>
+{% endif %}
+{% endblock  %}

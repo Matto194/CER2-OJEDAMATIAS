@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock %} </title>
+    {% load static %}
+    <link rel="stylesheet" href={% static 'core/css/bootstrap.css' %}>
+    <link rel="stylesheet" href={% static 'core/css/estilos.css' %}>
+</head>
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">CorrespondenciaYA!</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style = "padding-right: 30px">Inicio</a>
+                        </li>
+                    </ul>
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                        method="POST">
+                         {% csrf_token %}
+                        <div class="input-group">
+                        <input type="text" class="form-control me-2" aria-label="Buscar" placeholder="Buscar..." name="buscar" value="{{ request.POST.buscar }}">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-light" type="submit">Buscar</button>
+                         <i class="fas fa-search fa-sm"></i>
+                        </button>
+                        </div>
+                     </div>
+                    </form>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <a type="button" href={%url 'admin:index' %} class="btn btn-primary me-3 btn-outline-light"> Iniciar Sesión</a>
+                </div>
+            </div>
+        </nav>
+   
+        {% block content %}
+
+        {% endblock %}
+</body>
+
+</html>
